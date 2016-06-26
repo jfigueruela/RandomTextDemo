@@ -1,4 +1,4 @@
-package demo;
+package utils;
 
 public class DemoDTO {
     /*
@@ -12,11 +12,11 @@ public class DemoDTO {
     /*
      * The average time spent analyzing a paragraph
      */
-    private Integer avg_paragraph_processing_time;
+    private long avg_paragraph_processing_time;
     /*
      * Total processing time to generate the final response
      */
-    private Integer total_processing_time;
+    private long total_processing_time;
 
     /**
      * DemoDTO
@@ -31,7 +31,7 @@ public class DemoDTO {
      *            - total processing time to generate the final response
      */
     public DemoDTO(String freq_word, Integer avg_paragraph_size,
-            Integer avg_paragraph_processing_time, Integer total_processing_time) {
+            long avg_paragraph_processing_time, Integer total_processing_time) {
         super();
         this.freq_word = freq_word;
         this.avg_paragraph_size = avg_paragraph_size;
@@ -58,20 +58,20 @@ public class DemoDTO {
         this.avg_paragraph_size = avg_paragraph_size;
     }
 
-    public Integer getAvg_paragraph_processing_time() {
+    public long getAvg_paragraph_processing_time() {
         return avg_paragraph_processing_time;
     }
 
     public void setAvg_paragraph_processing_time(
-            Integer avg_paragraph_processing_time) {
+            long avg_paragraph_processing_time) {
         this.avg_paragraph_processing_time = avg_paragraph_processing_time;
     }
 
-    public Integer getTotal_processing_time() {
+    public long getTotal_processing_time() {
         return total_processing_time;
     }
 
-    public void setTotal_processing_time(Integer total_processing_time) {
+    public void setTotal_processing_time(long total_processing_time) {
         this.total_processing_time = total_processing_time;
     }
 }

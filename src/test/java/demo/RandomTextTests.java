@@ -38,34 +38,35 @@ import demo.Application;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
-public class GreetingControllerTests {
+public class RandomTextTests {
 
-	@Autowired
-	private WebApplicationContext ctx;
+    @Autowired
+    private WebApplicationContext ctx;
 
-	private MockMvc mockMvc;
+    private MockMvc mockMvc;
 
-	@Before
-	public void setUp() {
-		this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
-	}
+    @Before
+    public void setUp() {
+        this.mockMvc = MockMvcBuilders.webAppContextSetup(ctx).build();
+    }
 
-	@Test
-	public void noParamGreetingShouldReturnDefaultMessage() throws Exception {
+    @Test
+    public void basicTest() throws Exception {
 
-//		this.mockMvc.perform(get("/greeting"))
-//				.andDo(print())
-//				.andExpect(status().isOk())
-//				.andExpect(jsonPath("$.content").value("Hello, World!"));
-	}
+        this.mockMvc.perform(get("/betvictor/text"));
+        // .andDo(print())
+        // .andExpect(status().isOk());
+        // .andExpect(jsonPath("$.content").value("Hello, World!"));
+    }
 
-	@Test
-	public void paramGreetingShouldReturnTailoredMessage() throws Exception {
+    @Test
+    public void paramGreetingShouldReturnTailoredMessage() throws Exception {
 
-//		this.mockMvc.perform(get("/greeting").param("name", "Spring Community"))
-//				.andDo(print())
-//				.andExpect(status().isOk())
-//				.andExpect(jsonPath("$.content").value("Hello, Spring Community!"));
-	}
+        // this.mockMvc.perform(get("/greeting").param("name",
+        // "Spring Community"))
+        // .andDo(print())
+        // .andExpect(status().isOk())
+        // .andExpect(jsonPath("$.content").value("Hello, Spring Community!"));
+    }
 
 }
