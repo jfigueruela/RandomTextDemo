@@ -32,9 +32,6 @@ import org.springframework.web.context.WebApplicationContext;
 
 import demo.Application;
 
-/**
- * @author Greg Turnquist
- */
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 @WebAppConfiguration
