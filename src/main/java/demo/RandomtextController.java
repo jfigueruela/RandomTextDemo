@@ -37,7 +37,7 @@ public class RandomtextController {
             @RequestParam(value = "w_count_max", required = false, defaultValue = "25") Integer wCountMax) {
         logger.info(String
                 .format("Incoming parameters {p_start:%s,p_end:%s,w_count_min:%s,w_count_max:%s, }", pStart, pEnd, wCountMin, wCountMax));
-        DemoDTO result = RandomtextManager.process(pStart, pEnd, wCountMin, wCountMax);
+        DemoDTO result = RandomtextManager.processMultiple(pStart, pEnd, wCountMin, wCountMax);
 
         return ResponseEntity.accepted().body(result);
     }
