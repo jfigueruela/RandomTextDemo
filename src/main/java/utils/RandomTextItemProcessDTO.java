@@ -1,11 +1,11 @@
 package utils;
 
+@Deprecated
 public class RandomTextItemProcessDTO {
     private RandomtextTextRequest randomtextTextRequest;
-    private long processTime;
+    private long                  processTime;
 
-    public RandomTextItemProcessDTO(
-            RandomtextTextRequest randomtextTextRequest, long processTime) {
+    public RandomTextItemProcessDTO(RandomtextTextRequest randomtextTextRequest, long processTime) {
         this.randomtextTextRequest = randomtextTextRequest;
         this.processTime = processTime;
     }

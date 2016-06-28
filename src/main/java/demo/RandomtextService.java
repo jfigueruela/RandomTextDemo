@@ -2,7 +2,6 @@ package demo;
 
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -13,22 +12,24 @@ import utils.RandomTextItemProcessDTO;
 import utils.RandomtextTextRequest;
 
 public class RandomtextService {
-    private static final Logger logger = Logger
-            .getLogger(RandomtextService.class);
+    private static final Logger logger         = Logger.getLogger(RandomtextService.class);
     private static final String RANDOMTEXT_URL = "http://www.randomtext.me";
-    private static final String RANDOMTEXT_PARAMS = "/api/giberish/p-3/2-5";
 
     /**
      * Gets a single {RandomtextTextRequest} object.
      * 
+     * @param paragraphs
+     * @param maxWNumber
      * @return {RandomtextTextRequest}
      */
-    public RandomtextTextRequest getRandomText() {
+    public RandomtextTextRequest getRandomText(int paragraphs, int maxWNumber) {
         RandomtextTextRequest result = null;
+
+        String randomParams = String.format("/api/giberish/p-%s/1-%s", paragraphs, maxWNumber);
+
         try {
             // Connect to and bind a JSON response object.
-            JSONObject json = JsonReader.readJsonFromUrl(String.format("%s%s",
-                    RANDOMTEXT_URL, RANDOMTEXT_PARAMS));
+            JSONObject json = JsonReader.readJsonFromUrl(String.format("%s%s", RANDOMTEXT_URL, randomParams));
             // Request handing object.
             result = new RandomtextTextRequest(json);
         } catch (IOException e) {
@@ -42,10 +43,11 @@ public class RandomtextService {
      * Get a list of random text objects with specified number items.
      * 
      * @param numItems
+     * @param paragraphs
+     * @param maxWNumber
      * @return
-     * @throws InterruptedException
      */
-    public List<RandomTextItemProcessDTO> getRandomTextList(int numItems) {
+    public List<RandomTextItemProcessDTO> getRandomTextList(int numItems, int paragraphs, int maxWNumber) {
         List<RandomTextItemProcessDTO> result = new ArrayList<RandomTextItemProcessDTO>();
         try {
             for (int i = 0; i < numItems; i++) {
@@ -54,8 +56,7 @@ public class RandomtextService {
                 Thread.sleep(1000);
                 long endProcTime = System.nanoTime();
                 long time = (endProcTime - startProcTime) / 1000000000;
-                result.add(new RandomTextItemProcessDTO(this.getRandomText(),
-                        time));
+                result.add(new RandomTextItemProcessDTO(this.getRandomText(paragraphs, maxWNumber), time));
             }
         } catch (InterruptedException e) {
             logger.error(String.format("Error loading items data."));

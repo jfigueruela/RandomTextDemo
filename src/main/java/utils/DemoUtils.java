@@ -31,28 +31,16 @@ public class DemoUtils {
         return random.nextInt((max - min) + 1) + min;
     }
 
-    public static String getParagraphSum(List<RandomTextItemProcessDTO> list) {
-        String result = "";
-        for (RandomTextItemProcessDTO item : list) {
-            result += item.getRandomtextTextRequest().getText_out();
-        }
-        return result;
-    }
-
-    public static Integer getParagraphAverageSize(
-            List<RandomTextItemProcessDTO> list) {
+    public static Integer getParagraphAverageSize(RandomtextTextRequest randomtextTextRequest) {
         Integer result = 0;
-        for (RandomTextItemProcessDTO item : list) {
-            result += item.getRandomtextTextRequest().getText_out().length();
+        String[] paragraphs = randomtextTextRequest.getText_out().split("<p>");
+        for (String paragraph : paragraphs) {
+            result += cleanString(paragraph).split(" ").length;
         }
-        if (result > 0) {
-            result = result / list.size();
-        }
-        return result;
+        return result / paragraphs.length;
     }
 
-    public static long getParagraphProcessingTime(
-            List<RandomTextItemProcessDTO> list) {
+    public static long getParagraphProcessingTime(List<RandomTextItemProcessDTO> list) {
         long result = 0;
         for (RandomTextItemProcessDTO item : list) {
             result += item.getProcessTime();
@@ -63,6 +51,10 @@ public class DemoUtils {
         return result;
     }
 
+    private static String cleanString(String input) {
+        return input.replaceAll("\\<.*?>", " ").replaceAll("(\\r|\\n)", " ").replaceAll("(\\.)", " ");
+    }
+
     /**
      * Clean and search for the most frequent work on text.
      * 
@@ -70,12 +62,7 @@ public class DemoUtils {
      * @return {String} Frequent word.
      */
     public static String searchMostFrequentWord(String inputString) {
-        // Remove all HTML marks.
-        inputString = inputString.replaceAll("\\<.*?>", " ");
-        // Remove all end of line character.
-        inputString = inputString.replaceAll("(\\r|\\n)", " ");
-        // Remove all '.' character
-        inputString = inputString.replaceAll("(\\.)", " ");
+        inputString = cleanString(inputString);
         logger.info("inputString:" + inputString);
         // Split string to array to be processed.
         String[] wordsArray = inputString.split(" ");

@@ -14,8 +14,7 @@ import utils.DemoDTO;
 @RequestMapping("/betvictor")
 public class RandomtextController {
 
-    private static final Logger logger = Logger
-            .getLogger(RandomtextController.class);
+    private static final Logger logger = Logger.getLogger(RandomtextController.class);
 
     /**
      * 
@@ -34,13 +33,11 @@ public class RandomtextController {
     public ResponseEntity<DemoDTO> text(
             @RequestParam(value = "p_start", required = false, defaultValue = "1") Integer pStart,
             @RequestParam(value = "p_end", required = false, defaultValue = "3") Integer pEnd,
-            @RequestParam(value = "w_count_min", required = false, defaultValue = "2") Integer wCountMin,
-            @RequestParam(value = "w_count_max", required = false, defaultValue = "5") Integer wCountMax) {
+            @RequestParam(value = "w_count_min", required = false, defaultValue = "1") Integer wCountMin,
+            @RequestParam(value = "w_count_max", required = false, defaultValue = "25") Integer wCountMax) {
         logger.info(String
-                .format("Incoming parameters {p_start:%s,p_end:%s,w_count_min:%s,w_count_max:%s, }",
-                        pStart, pEnd, wCountMin, wCountMax));
-        DemoDTO result = RandomtextManager.process(pStart, pEnd, wCountMin,
-                wCountMax);
+                .format("Incoming parameters {p_start:%s,p_end:%s,w_count_min:%s,w_count_max:%s, }", pStart, pEnd, wCountMin, wCountMax));
+        DemoDTO result = RandomtextManager.process(pStart, pEnd, wCountMin, wCountMax);
 
         return ResponseEntity.accepted().body(result);
     }
