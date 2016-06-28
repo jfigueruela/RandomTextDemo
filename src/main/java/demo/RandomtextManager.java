@@ -41,7 +41,6 @@ public class RandomtextManager {
         long endProcTime = System.nanoTime();
         result.setAvg_paragraph_processing_time((endProcTime - startProcTime) / 1000000000);
 
-        // TODO @jfigueruela: Here persist {DemoDTO}
         return result;
     }
 
