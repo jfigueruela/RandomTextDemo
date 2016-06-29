@@ -1,6 +1,5 @@
 package utils;
 
-@Deprecated
 public class RandomTextItemProcessDTO {
     private RandomtextTextRequest randomtextTextRequest;
     private long                  processTime;

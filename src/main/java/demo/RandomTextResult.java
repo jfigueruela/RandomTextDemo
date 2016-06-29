@@ -1,41 +1,45 @@
-package models;
+package demo;
 
 import java.util.Date;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 @Entity
+@Table(name = "RandomTextResult")
 public class RandomTextResult {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
-    @Temporal(TemporalType.TIMESTAMP)
-    private java.util.Date timestamp;
+
+    @NotNull
+    private java.util.Date date;
     /*
      * The word that was the most frequent in the paragraphs
      */
-    private String freq_word;
+    private String         freq_word;
     /*
      * The average size of a paragraph
      */
-    private Integer avg_paragraph_size;
+    private Integer        avg_paragraph_size;
     /*
      * The average time spent analyzing a paragraph
      */
-    private long avg_paragraph_processing_time;
+    private long           avg_paragraph_processing_time;
     /*
      * Total processing time to generate the final response
      */
-    private long total_processing_time;
+    private long           total_processing_time;
 
-    protected RandomTextResult() {
+    public RandomTextResult() {
+        // TODO Auto-generated constructor stub
     }
 
-    public RandomTextResult(String freq_word, Integer avg_paragraph_size,
-            long avg_paragraph_processing_time, long total_processing_time) {
+    public RandomTextResult(String freq_word, Integer avg_paragraph_size, long avg_paragraph_processing_time,
+            long total_processing_time) {
         super();
-        this.timestamp = new Date();
+        this.date = new Date();
         this.freq_word = freq_word;
         this.avg_paragraph_size = avg_paragraph_size;
         this.avg_paragraph_processing_time = avg_paragraph_processing_time;
@@ -48,14 +52,6 @@ public class RandomTextResult {
 
     public void setId(long id) {
         this.id = id;
-    }
-
-    public java.util.Date getTimestamp() {
-        return timestamp;
-    }
-
-    public void setTimestamp(java.util.Date timestamp) {
-        this.timestamp = timestamp;
     }
 
     public String getFreq_word() {
@@ -78,8 +74,7 @@ public class RandomTextResult {
         return avg_paragraph_processing_time;
     }
 
-    public void setAvg_paragraph_processing_time(
-            long avg_paragraph_processing_time) {
+    public void setAvg_paragraph_processing_time(long avg_paragraph_processing_time) {
         this.avg_paragraph_processing_time = avg_paragraph_processing_time;
     }
 
@@ -91,11 +86,12 @@ public class RandomTextResult {
         this.total_processing_time = total_processing_time;
     }
 
-    @Override
-    public String toString() {
-        return String.format(
-                "RandomTextResult[id=%d, timestamp='%s', lastName='%s']", id,
-                timestamp);
+    public java.util.Date getDate() {
+        return date;
+    }
+
+    public void setDate(java.util.Date date) {
+        this.date = date;
     }
 
 }

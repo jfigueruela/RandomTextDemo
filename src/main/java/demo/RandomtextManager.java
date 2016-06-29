@@ -5,7 +5,6 @@ import java.util.List;
 
 import utils.DemoDTO;
 import utils.DemoUtils;
-import utils.RandomTextItemProcessDTO;
 import utils.RandomtextTextRequest;
 
 public class RandomtextManager {
@@ -19,23 +18,19 @@ public class RandomtextManager {
      * @param wCountMax
      * @return {DemoDTO}
      */
-    public static DemoDTO process(Integer pStart, Integer pEnd,
-            Integer wCountMin, Integer wCountMax) {
+    public static DemoDTO process(Integer pStart, Integer pEnd, Integer wCountMin, Integer wCountMax) {
         long startProcTime = System.nanoTime();
         DemoDTO result = new DemoDTO();
 
         RandomtextService randomtextService = new RandomtextService();
         // Number of paragraphs, generated random value.
         int paragrapthNumber = DemoUtils.getRandomValue(pStart, pEnd);
-        RandomtextTextRequest randomtextTextRequest = randomtextService
-                .getRandomText(paragrapthNumber, wCountMax);
+        RandomtextTextRequest randomtextTextRequest = randomtextService.getRandomText(paragrapthNumber, wCountMax);
 
         // Set most frequenct word.
-        result.setFreq_word(DemoUtils
-                .searchMostFrequentWord(randomtextTextRequest.getText_out()));
+        result.setFreq_word(DemoUtils.searchMostFrequentWord(randomtextTextRequest.getText_out()));
 
-        result.setAvg_paragraph_size(DemoUtils
-                .getParagraphAverageSize(randomtextTextRequest));
+        result.setAvg_paragraph_size(DemoUtils.getParagraphAverageSize(randomtextTextRequest));
 
         // Calculate total process time elapsed.
         long endProcTime = System.nanoTime();
@@ -44,8 +39,7 @@ public class RandomtextManager {
         return result;
     }
 
-    public static DemoDTO processMultiple(Integer pStart, Integer pEnd,
-            Integer wCountMin, Integer wCountMax) {
+    public static DemoDTO processMultiple(Integer pStart, Integer pEnd, Integer wCountMin, Integer wCountMax) {
         long startProcTime = System.nanoTime();
         DemoDTO result = new DemoDTO();
         int serverRequestNumber = DemoUtils.getRandomValue(pStart, pEnd);
@@ -54,12 +48,11 @@ public class RandomtextManager {
             resultsList.add(process(pStart, pEnd, wCountMin, wCountMax));
         }
 
-        
         int avgProcessingTime = 0;
-        for(DemoDTO listItem : resultsList) {
+        for (DemoDTO listItem : resultsList) {
             avgProcessingTime += listItem.getAvg_paragraph_processing_time();
         }
-        result.setAvg_paragraph_processing_time(avgProcessingTime/resultsList.size());
+        result.setAvg_paragraph_processing_time(avgProcessingTime / resultsList.size());
         long endProcTime = System.nanoTime();
         result.setTotal_processing_time((endProcTime - startProcTime) / 1000000000);
 

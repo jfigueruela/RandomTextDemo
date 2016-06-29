@@ -1,12 +1,9 @@
 package utils;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
 import org.apache.log4j.Logger;
-
-import demo.RandomtextService;
 
 /**
  * Demo Utils class.
